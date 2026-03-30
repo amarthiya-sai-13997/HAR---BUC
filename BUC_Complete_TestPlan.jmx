@@ -58,7 +58,6 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <!-- Thread Group -->
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="BUC Thread Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -73,7 +72,6 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <!-- CSV Data Set Config -->
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config - TechnicianLogins" enabled="true">
           <stringProp name="delimiter">,</stringProp>
           <stringProp name="fileEncoding">UTF-8</stringProp>
@@ -87,7 +85,6 @@
         </CSVDataSet>
         <hashTree/>
 
-        <!-- HTTP Cookie Manager -->
         <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
           <collectionProp name="CookieManager.cookies"/>
           <boolProp name="CookieManager.clearEachIteration">true</boolProp>
@@ -95,7 +92,6 @@
         </CookieManager>
         <hashTree/>
 
-        <!-- HTTP Header Manager (Global) -->
         <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager - Global" enabled="true">
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
@@ -130,7 +126,6 @@
         </HeaderManager>
         <hashTree/>
 
-        <!-- JSR223 PreProcessor - Generate UID -->
         <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor - Generate UID" enabled="true">
           <stringProp name="cacheKey">true</stringProp>
           <stringProp name="filename"></stringProp>
@@ -140,7 +135,6 @@
         </JSR223PreProcessor>
         <hashTree/>
 
-        <!-- HTTP Request Defaults -->
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
@@ -156,9 +150,7 @@
         </ConfigTestElement>
         <hashTree/>
 
-        <!-- ==================== PHASE 1: LOGIN ==================== -->
 
-        <!-- Step 1: GET / - Load Login Page -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 01 - Load Login Page GET /" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
@@ -178,7 +170,6 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <!-- Extract nonce from HTML body -->
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract nonce from HTML" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">nonce</stringProp>
@@ -187,7 +178,7 @@
             <stringProp name="RegexExtractor.default">NONCE_NOT_FOUND</stringProp>
             <stringProp name="RegexExtractor.match_no">1</stringProp>
           </RegexExtractor>
-          <!-- Extract admpcsrf from response headers -->
+          <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract admpcsrf from Cookie" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">true</stringProp>
             <stringProp name="RegexExtractor.refname">admpcsrf</stringProp>
@@ -196,9 +187,9 @@
             <stringProp name="RegexExtractor.default">ADMPCSRF_NOT_FOUND</stringProp>
             <stringProp name="RegexExtractor.match_no">1</stringProp>
           </RegexExtractor>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 2: POST /j_security_check - Technician Login -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 02 - Technician Login POST /j_security_check" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -237,7 +228,6 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <!-- Extract admpcsrf after login -->
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract admpcsrf after Login" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">true</stringProp>
             <stringProp name="RegexExtractor.refname">admpcsrf</stringProp>
@@ -246,9 +236,9 @@
             <stringProp name="RegexExtractor.default">ADMPCSRF_NOT_FOUND</stringProp>
             <stringProp name="RegexExtractor.match_no">1</stringProp>
           </RegexExtractor>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 3: POST /api/json/securityTabs/lbRedirect - LB Redirect -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 03 - LB Redirect POST /api/json/securityTabs/lbRedirect" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -282,9 +272,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
 
-        <!-- ==================== PHASE 2: NAVIGATE TO BUC ==================== -->
 
-        <!-- Step 4: GET /BulkExecuteForm.do - Navigate to BUC Page -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 04 - Navigate to BUC Page GET /BulkExecuteForm.do" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -323,7 +311,6 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <!-- Extract nonce from BUC page HTML -->
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract nonce from BUC Page" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">nonce</stringProp>
@@ -332,9 +319,9 @@
             <stringProp name="RegexExtractor.default">NONCE_NOT_FOUND</stringProp>
             <stringProp name="RegexExtractor.match_no">1</stringProp>
           </RegexExtractor>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 5: POST /api/json/securityTabs/getTabs - Get Tabs -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 05 - Get Tabs POST /api/json/securityTabs/getTabs" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -368,7 +355,6 @@
         </HTTPSamplerProxy>
         <hashTree/>
 
-        <!-- Step 6: POST /api/json/mgmt/getAvailableMgmtActions - Get Available Mgmt Actions -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 06 - Get Available Mgmt Actions POST /api/json/mgmt/getAvailableMgmtActions" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -396,7 +382,6 @@
         </HTTPSamplerProxy>
         <hashTree/>
 
-        <!-- Step 7: POST /RestAPI/WC/Notification?mTCall=getAllNotifications - Get All Notifications -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 07 - Get All Notifications POST /RestAPI/WC/Notification" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -424,9 +409,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
 
-        <!-- ==================== PHASE 3: UPLOAD CSV ==================== -->
 
-        <!-- Step 8: POST /BulkExecuteForm.do?methodToCall=csvImport - Upload CSV -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 08 - Upload CSV POST /BulkExecuteForm.do csvImport" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
@@ -456,7 +439,6 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <!-- Override Content-Type for multipart -->
           <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager - Multipart Override" enabled="true">
             <collectionProp name="HeaderManager.headers">
               <elementProp name="" elementType="Header">
@@ -465,9 +447,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 9: POST /BulkExecuteForm.do?methodToCall=getCSVStatus - Get CSV Status -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 09 - Get CSV Status POST /BulkExecuteForm.do getCSVStatus" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -508,9 +490,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 10: POST /BulkExecuteForm.do?methodToCall=getObjectDetails - Get Object Details -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 10 - Get Object Details POST /BulkExecuteForm.do getObjectDetails" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -551,11 +533,10 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- ==================== PHASE 4: VALIDATION ==================== -->
 
-        <!-- Step 11: POST /BulkExecuteForm.do?methodToCall=getNavigationBarDetails -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 11 - Get Navigation Bar Details POST /BulkExecuteForm.do getNavigationBarDetails" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -596,9 +577,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 12: POST /BulkExecuteForm.do?methodToCall=getOUNameAvailableStatus -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 12 - Get OU Name Available Status POST /BulkExecuteForm.do getOUNameAvailableStatus" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -639,9 +620,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 13: POST /BulkExecuteForm.do?methodToCall=getValidationStatus (1st call) -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 13 - Get Validation Status 1st POST /BulkExecuteForm.do getValidationStatus" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -682,9 +663,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 14: POST /BulkExecuteForm.do?methodToCall=editField -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 14 - Edit Field POST /BulkExecuteForm.do editField" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -767,9 +748,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 15: POST /BulkExecuteForm.do?methodToCall=getValidationStatus (2nd call) -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 15 - Get Validation Status 2nd POST /BulkExecuteForm.do getValidationStatus" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -810,11 +791,10 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- ==================== PHASE 5: SELECT CONTAINER ==================== -->
 
-        <!-- Step 16: POST /BulkExecuteForm.do?methodToCall=getSelectedContainer -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 16 - Get Selected Container POST /BulkExecuteForm.do getSelectedContainer" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -855,9 +835,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 17: POST /BulkExecuteForm.do?methodToCall=getMgmtOperationsDetails -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 17 - Get Mgmt Operations Details POST /BulkExecuteForm.do getMgmtOperationsDetails" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -898,9 +878,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 18: POST /Tree.do?methodToCall=buildJSTree (1st call) -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 18 - Build JS Tree 1st POST /Tree.do buildJSTree" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -947,9 +927,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 19: POST /Tree.do?methodToCall=buildJSTree (2nd call with key=0) -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 19 - Build JS Tree 2nd POST /Tree.do buildJSTree key=0" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -1002,11 +982,10 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- ==================== PHASE 6: SUBMIT CREATE USERS ==================== -->
 
-        <!-- Step 20: POST /BulkExecuteForm.do?methodToCall=submitExecuteLayout -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 20 - Submit Create Users POST /BulkExecuteForm.do submitExecuteLayout" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -1053,11 +1032,10 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- ==================== PHASE 7: RESULT VIEW ==================== -->
 
-        <!-- Step 21: POST /RVCAction.do?methodToCall=getResultViewListUI -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 21 - Get Result View List UI POST /RVCAction.do getResultViewListUI" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -1098,9 +1076,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 22: POST /RVCAction.do?methodToCall=getRVHeaderUI (1st call) -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 22 - Get RV Header UI 1st POST /RVCAction.do getRVHeaderUI" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -1141,9 +1119,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 23: POST /RVCAction.do?methodToCall=getResultViewUI (1st call) -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 23 - Get Result View UI 1st POST /RVCAction.do getResultViewUI" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -1184,17 +1162,15 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- ==================== PHASE 8: WAIT & CHECK RESULTS ==================== -->
 
-        <!-- Constant Timer - 30 second wait -->
         <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer - 30 Second Wait" enabled="true">
           <stringProp name="ConstantTimer.delay">30000</stringProp>
         </ConstantTimer>
         <hashTree/>
 
-        <!-- Step 25: POST /BulkExecuteForm.do?methodToCall=getDynamicUpdateDetails (1st call) -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 25 - Get Dynamic Update Details 1st POST /BulkExecuteForm.do getDynamicUpdateDetails" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -1235,9 +1211,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 26: POST /BulkExecuteForm.do?methodToCall=getDynamicUpdateDetails (2nd call) -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 26 - Get Dynamic Update Details 2nd POST /BulkExecuteForm.do getDynamicUpdateDetails" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -1278,9 +1254,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 27: POST /RVCAction.do?methodToCall=getRVHeaderUI (2nd call) -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 27 - Get RV Header UI 2nd POST /RVCAction.do getRVHeaderUI" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -1321,9 +1297,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 28: POST /BulkExecuteForm.do?methodToCall=getContainerNameForResultPage -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 28 - Get Container Name For Result Page POST /BulkExecuteForm.do getContainerNameForResultPage" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -1364,9 +1340,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 29: POST /BulkExecuteForm.do?methodToCall=checkAllObjectsSucceeded -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 29 - Check All Objects Succeeded POST /BulkExecuteForm.do checkAllObjectsSucceeded" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -1407,9 +1383,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 30: POST /BulkExecuteForm.do?methodToCall=getCommonErrorMessage -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 30 - Get Common Error Message POST /BulkExecuteForm.do getCommonErrorMessage" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -1450,9 +1426,9 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- Step 31: POST /RVCAction.do?methodToCall=getResultViewUI (2nd call) -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 31 - Get Result View UI 2nd POST /RVCAction.do getResultViewUI" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
@@ -1493,11 +1469,10 @@
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
         </hashTree>
 
-        <!-- ==================== LISTENERS ==================== -->
 
-        <!-- View Results Tree -->
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
@@ -1535,7 +1510,6 @@
         </ResultCollector>
         <hashTree/>
 
-        <!-- Summary Report -->
         <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
