@@ -35,22 +35,7 @@
           </elementProp>
           <elementProp name="CSV_FILE" elementType="Argument">
             <stringProp name="Argument.name">CSV_FILE</stringProp>
-            <stringProp name="Argument.value">C:/JMeter/sample.csv</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="OBJECT_INDEX_ID" elementType="Argument">
-            <stringProp name="Argument.name">OBJECT_INDEX_ID</stringProp>
-            <stringProp name="Argument.value">3416</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="EDIT_FIELD_VALUE" elementType="Argument">
-            <stringProp name="Argument.name">EDIT_FIELD_VALUE</stringProp>
-            <stringProp name="Argument.value">Jmetertest91235</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="EDIT_FIELD_OLD_VALUE" elementType="Argument">
-            <stringProp name="Argument.name">EDIT_FIELD_OLD_VALUE</stringProp>
-            <stringProp name="Argument.value">Jmetertest91234</stringProp>
+            <stringProp name="Argument.value">sample.csv</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -65,8 +50,8 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">10</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">5</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(threads,10)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(rampup,10)}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -685,7 +670,7 @@
         </hashTree>
 
         <!-- Step 14: POST /BulkExecuteForm.do?methodToCall=editField -->
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 14 - Edit Field POST /BulkExecuteForm.do editField" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 14 - Edit Field POST /BulkExecuteForm.do editField" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="objectIndexId" elementType="HTTPArgument">
@@ -770,7 +755,7 @@
         </hashTree>
 
         <!-- Step 15: POST /BulkExecuteForm.do?methodToCall=getValidationStatus (2nd call) -->
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 15 - Get Validation Status 2nd POST /BulkExecuteForm.do getValidationStatus" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Step 15 - Get Validation Status 2nd POST /BulkExecuteForm.do getValidationStatus" enabled="false">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="uid" elementType="HTTPArgument">
